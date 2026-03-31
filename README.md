@@ -252,32 +252,25 @@ npm install
 
 ## ⚙️ Configuration
 
+**⚠️ IMPORTANT: Never commit actual credentials to version control. Always use environment variables and .env files (which are in .gitignore).**
+
 ### Backend Environment Variables (.env)
-```env
-# Server Configuration
+Create a `.env` file in the Backend folder with the following variables:
+```
 PORT=3000
 NODE_ENV=development
-
-# MongoDB
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ai-interview-prep
-
-# Google Generative AI
-GOOGLE_GENAI_API_KEY=your_google_genai_api_key_here
-
-# Email Service (Gmail example)
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-app-specific-password
-
-# JWT Configuration
-JWT_SECRET=your_jwt_secret_key_here
+MONGODB_URI=<your-mongodb-connection-string>
+GOOGLE_GENAI_API_KEY=<your-google-genai-api-key>
+EMAIL_USER=<your-email@gmail.com>
+EMAIL_PASSWORD=<your-app-specific-password>
+JWT_SECRET=<your-jwt-secret-key>
 JWT_EXPIRE=7d
-
-# CORS
 CORS_ORIGIN=http://localhost:5173
 ```
 
 ### Frontend Environment Variables (.env.local)
-```env
+Create a `.env.local` file in the Frontend folder with the following variables:
+```
 VITE_API_BASE_URL=http://localhost:3000/api
 VITE_APP_NAME=AI Interview Prep
 ```
