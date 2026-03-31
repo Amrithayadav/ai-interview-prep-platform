@@ -1,0 +1,717 @@
+
+// ── Variables ──────────────────────────────────────────────
+$bg-base:        #0a0d12;
+$bg-surface:     #111620;
+$bg-card:        #161c28;
+$bg-card-hover:  #1a2235;
+
+$teal:           #2dd4a0;
+$teal-dim:       rgba(45, 212, 160, 0.10);
+$teal-border:    rgba(45, 212, 160, 0.25);
+$teal-glow:      rgba(45, 212, 160, 0.07);
+
+$text-primary:   #eef2f7;
+$text-secondary: #8b95a7;
+$text-muted:     #4a5568;
+
+$border:         rgba(255, 255, 255, 0.07);
+$border-strong:  rgba(255, 255, 255, 0.12);
+
+$font-display:   'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+$font-body:      'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+$radius-sm:      6px;
+$radius-md:      10px;
+$radius-lg:      14px;
+$radius-pill:    30px;
+
+$bp-md:          900px;
+$bp-sm:          600px;
+
+// ── Mixins ────────────────────────────────────────────────
+@mixin card {
+  background: $bg-card;
+  border: 0.5px solid $border-strong;
+  border-radius: $radius-lg;
+}
+
+@mixin teal-icon-box($size: 38px) {
+  width: $size;
+  height: $size;
+  background: $teal-dim;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $teal;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin btn-base {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: $radius-md;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.15s, background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+@mixin respond-md {
+  @media (max-width: $bp-md) { @content; }
+}
+
+@mixin respond-sm {
+  @media (max-width: $bp-sm) { @content; }
+}
+
+// ── Reset ─────────────────────────────────────────────────
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ── Root ──────────────────────────────────────────────────
+.aip-root {
+  position: relative;
+  min-height: 100vh;
+  background: $bg-base;
+  color: $text-primary;
+  font-family: $font-body;
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+// ── Background Glows ──────────────────────────────────────
+.aip-glow-1,
+.aip-glow-2 {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aip-glow-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, $teal-glow 0%, transparent 70%);
+  top: -200px;
+  left: -150px;
+}
+
+.aip-glow-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(45, 212, 160, 0.04) 0%, transparent 70%);
+  bottom: -100px;
+  right: -100px;
+}
+
+// ── NAV ───────────────────────────────────────────────────
+.aip-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(10, 13, 18, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 0.5px solid $border;
+
+  @include respond-md {
+    padding: 0 24px;
+  }
+}
+
+.aip-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-display;
+  font-size: 16px;
+  font-weight: 700;
+  color: $text-primary;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.aip-bolt {
+  color: $teal;
+}
+
+.aip-nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+
+  a {
+    font-size: 13px;
+    color: $text-secondary;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
+  @include respond-md {
+    display: none;
+  }
+}
+
+.aip-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @include respond-md {
+    display: none;
+  }
+}
+
+.aip-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: $text-primary;
+  font-size: 20px;
+  cursor: pointer;
+
+  @include respond-md {
+    display: block;
+  }
+}
+
+// ── Mobile Menu ───────────────────────────────────────────
+.aip-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px;
+  background: $bg-surface;
+  border-bottom: 0.5px solid $border;
+  position: relative;
+  z-index: 99;
+
+  a {
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+}
+
+// ── Buttons ───────────────────────────────────────────────
+.aip-btn-primary {
+  @include btn-base;
+  background: $teal;
+  color: $bg-base;
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  &.aip-btn-lg {
+    font-size: 14px;
+    padding: 11px 24px;
+  }
+
+  &.aip-btn-full {
+    width: 100%;
+    text-align: center;
+    margin-top: 14px;
+  }
+}
+
+.aip-btn-ghost {
+  font-size: 13px;
+  color: $text-secondary;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.aip-btn-outline {
+  @include btn-base;
+  background: transparent;
+  color: $text-primary;
+  border: 0.5px solid $border-strong;
+
+  &:hover {
+    border-color: $teal-border;
+    background: $teal-dim;
+  }
+
+  &.aip-btn-lg {
+    font-size: 14px;
+    padding: 11px 24px;
+  }
+}
+
+// ── HERO ──────────────────────────────────────────────────
+.aip-hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 72px 48px 64px;
+
+  @include respond-md {
+    flex-direction: column;
+    padding: 48px 24px 40px;
+    gap: 36px;
+  }
+}
+
+.aip-hero-left {
+  flex: 1;
+}
+
+.aip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $teal-dim;
+  border: 0.5px solid $teal-border;
+  border-radius: $radius-pill;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: $teal;
+  margin-bottom: 24px;
+}
+
+.aip-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $teal;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.aip-hero-heading {
+  font-family: $font-display;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: $text-primary;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+
+  @include respond-md {
+    font-size: 30px;
+  }
+}
+
+.aip-accent {
+  color: $teal;
+}
+
+.aip-hero-sub {
+  color: $text-secondary;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 420px;
+  margin-bottom: 32px;
+}
+
+.aip-hero-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  @include respond-sm {
+    flex-direction: column;
+
+    a {
+      text-align: center;
+    }
+  }
+}
+
+.aip-hero-perks {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  color: $text-secondary;
+
+  @include respond-sm {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.aip-check {
+  color: $teal;
+  margin-right: 4px;
+}
+
+// ── Mock App Card ─────────────────────────────────────────
+.aip-app-card {
+  @include card;
+  width: 300px;
+  flex-shrink: 0;
+  padding: 22px 20px;
+
+  @include respond-md {
+    width: 100%;
+  }
+}
+
+.aip-app-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.aip-muted-sm {
+  font-size: 11px;
+  color: $text-muted;
+}
+
+.aip-section-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: $text-primary;
+  margin-bottom: 14px;
+}
+
+.aip-score-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.aip-score-ring {
+  @include flex-center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3px solid $teal;
+  font-size: 18px;
+  font-weight: 700;
+  color: $teal;
+  flex-shrink: 0;
+}
+
+.aip-score-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: $teal;
+  margin-bottom: 6px;
+}
+
+.aip-score-list {
+  list-style: none;
+  font-size: 11px;
+  color: $text-secondary;
+  line-height: 1.9;
+}
+
+.aip-divider {
+  height: 0.5px;
+  background: $border;
+  margin: 14px 0;
+}
+
+.aip-mock-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: $text-primary;
+  margin: 6px 0 4px;
+}
+
+.aip-mock-quote {
+  font-size: 11px;
+  color: $text-secondary;
+  font-style: italic;
+}
+
+// ── Brands Bar ────────────────────────────────────────────
+.aip-brands-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  padding: 24px 48px 40px;
+  border-bottom: 0.5px solid $border;
+
+  @include respond-md {
+    padding: 20px 24px 32px;
+    gap: 20px;
+  }
+}
+
+.aip-brand {
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-muted;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+// ── How It Works ──────────────────────────────────────────
+.aip-how-section {
+  position: relative;
+  z-index: 1;
+  padding: 72px 48px;
+
+  @include respond-md {
+    padding: 48px 24px;
+  }
+}
+
+.aip-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+
+  h2 {
+    font-family: $font-display;
+    font-size: 28px;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+}
+
+.aip-section-sub {
+  font-size: 14px;
+  color: $text-secondary;
+}
+
+.aip-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @include respond-md {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.aip-step-card {
+  @include card;
+  padding: 28px 24px;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+
+  &:hover {
+    background: $bg-card-hover;
+    border-color: $teal-border;
+    transform: translateY(-3px);
+  }
+}
+
+.aip-step-num {
+  @include flex-center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $teal-dim;
+  border: 0.5px solid $teal-border;
+  font-size: 12px;
+  font-weight: 700;
+  color: $teal;
+  margin-bottom: 18px;
+  font-family: $font-display;
+}
+
+.aip-step-icon {
+  @include teal-icon-box(38px);
+  margin-bottom: 16px;
+}
+
+.aip-step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: 8px;
+  font-family: $font-display;
+}
+
+.aip-step-desc {
+  font-size: 13px;
+  color: $text-secondary;
+  line-height: 1.7;
+}
+
+// ── Tech Stack Bar ────────────────────────────────────────
+.aip-tech-bar {
+  @include card;
+  position: relative;
+  z-index: 1;
+  margin: 0 48px 56px;
+  padding: 24px 28px;
+  text-align: center;
+
+  @include respond-md {
+    margin: 0 24px 40px;
+  }
+}
+
+.aip-tech-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: 16px;
+}
+
+.aip-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.aip-tech-pill {
+  background: $bg-base;
+  border: 0.5px solid $border-strong;
+  color: $text-secondary;
+  font-size: 12px;
+  padding: 5px 16px;
+  border-radius: $radius-pill;
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+
+  &:hover {
+    border-color: $teal-border;
+    color: $teal;
+  }
+}
+
+// ── Testimonial ───────────────────────────────────────────
+.aip-testimonial-section {
+  position: relative;
+  z-index: 1;
+  padding: 0 48px 56px;
+
+  @include respond-md {
+    padding: 0 24px 40px;
+  }
+}
+
+.aip-testimonial-card {
+  @include card;
+  border-color: $teal-border;
+  padding: 32px 36px;
+  max-width: 680px;
+  margin: 0 auto;
+
+  @include respond-sm {
+    padding: 24px 20px;
+  }
+}
+
+.aip-quote-mark {
+  font-size: 52px;
+  line-height: 1;
+  color: $teal;
+  font-family: Georgia, 'Times New Roman', serif;
+  margin-bottom: 12px;
+}
+
+.aip-quote-text {
+  font-size: 15px;
+  color: $text-primary;
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+.aip-quote-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.aip-author-avatar {
+  @include flex-center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: $teal-dim;
+  border: 0.5px solid $teal-border;
+  font-size: 13px;
+  font-weight: 700;
+  color: $teal;
+  flex-shrink: 0;
+}
+
+.aip-author-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.aip-author-role {
+  font-size: 12px;
+  color: $text-secondary;
+  margin-top: 2px;
+}
+
+// ── CTA Footer ────────────────────────────────────────────
+.aip-cta-section {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 56px 48px 64px;
+  border-top: 0.5px solid $border;
+
+  @include respond-md {
+    padding: 48px 24px 56px;
+  }
+}
+
+.aip-cta-heading {
+  font-family: $font-display;
+  font-size: 30px;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 10px;
+  letter-spacing: -0.4px;
+
+  @include respond-md {
+    font-size: 22px;
+  }
+}
+
+.aip-cta-sub {
+  font-size: 14px;
+  color: $text-secondary;
+  margin-bottom: 28px;
+}
+
