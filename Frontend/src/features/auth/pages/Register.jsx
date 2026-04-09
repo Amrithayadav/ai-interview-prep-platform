@@ -27,7 +27,7 @@ const Register = () => {
       setMessage("Account created successfully. Redirecting to login...");
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/login", { state: { email, password } });
       }, 1500);
     } else {
       setError(result || "Registration failed");

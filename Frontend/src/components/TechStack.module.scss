@@ -1,0 +1,63 @@
+@use '../style/global' as *;
+
+.section {
+  padding: 64px 0;
+  background: $bg-surface;
+  border-top: 1px solid $border-subtle;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  text-align: center;
+
+  @media (max-width: 768px) { padding: 0 24px; }
+}
+
+.title {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+
+.sub {
+  color: $text-secondary;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: $bg-card;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-md;
+  padding: 12px 22px;
+  transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+
+  &:hover {
+    border-color: $border-light;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  }
+}
+
+.chipIcon {
+  font-size: 18px;
+}
+
+.chipName {
+  font-size: 14px;
+  font-weight: 500;
+}

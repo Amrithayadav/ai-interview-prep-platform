@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../auth.form.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import PasswordInput from "../components/PasswordInput";
 
@@ -8,8 +8,9 @@ const Login = () => {
   const { loading, handleLogin } = useAuth();
   const navigate = useNavigate();
 
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const location = useLocation();
+  const [email, setemail] = useState(location.state?.email || "");
+  const [password, setpassword] = useState(location.state?.password || "");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -47,6 +48,7 @@ const Login = () => {
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
+              value={email}
               onChange={(e) => setemail(e.target.value)}
               type="email"
               id="email"

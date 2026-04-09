@@ -1,22 +1,18 @@
-import Navbar from "./landing/navbar/Navbar";
-import Steps from "./landing/steps/Steps";
-import BrandsBar from "./landing/brands/BrandsBar";
-import TechBar from "./landing/tech/TechBar";
-import Testimonial from "./landing/testimonial/Testimonial";
-import CTA from "./landing/cta/CTA";
-import Hero from "./landing/hero/Hero";
+import React from 'react';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import HowItWorks from "./components/HowItWorks";
+import TechStack from "./components/TechStack";
+import SignupCTA from "./components/SignupCTA";
 
-import "./style/Allinterviewprep.scss";
 export default function LandingPage() {
   return (
-    <div className="aip-root">
+    <div>
       <Navbar />
       <Hero />
-      <BrandsBar />
-      <Steps />
-      <TechBar />
-      <Testimonial />
-      <CTA />
+      <HowItWorks />
+      <TechStack />
+      <SignupCTA />
     </div>
   );
 }
